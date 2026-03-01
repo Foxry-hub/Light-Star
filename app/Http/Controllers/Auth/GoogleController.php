@@ -34,8 +34,14 @@ class GoogleController extends Controller
         $user = User::where('google_id', $googleUser->getId())->first();
 
         if ($user) {
-            // Existing Google user — just log in
+            // Existing Google user — already registered
             Auth::login($user, true);
+
+            $redirect = $user->isAdmin() ? redirect()->route('admin.dashboard') : redirect()->route('home');
+            return $redirect->with('google_alert', [
+                'type' => 'warning',
+                'message' => 'Akun Google ini sudah terdaftar sebelumnya. Anda berhasil masuk ke akun yang sudah ada.',
+            ]);
         } else {
             // Check if a user with the same email already exists (registered manually)
             $existingUser = User::where('email', $googleUser->getEmail())->first();
@@ -45,6 +51,12 @@ class GoogleController extends Controller
                 $existingUser->update(['google_id' => $googleUser->getId()]);
                 Auth::login($existingUser, true);
                 $user = $existingUser;
+
+                $redirect = $user->isAdmin() ? redirect()->route('admin.dashboard') : redirect()->route('home');
+                return $redirect->with('google_alert', [
+                    'type' => 'info',
+                    'message' => 'Email ini sudah terdaftar. Akun Google Anda berhasil dihubungkan dengan akun yang ada.',
+                ]);
             } else {
                 // Create a brand new user via Google
                 $user = User::create([
@@ -55,14 +67,12 @@ class GoogleController extends Controller
                     'role' => 'customer',
                 ]);
                 Auth::login($user, true);
+
+                return redirect()->route('home')->with('google_alert', [
+                    'type' => 'success',
+                    'message' => 'Selamat! Akun Anda berhasil dibuat dengan Google. Selamat datang di Light Star!',
+                ]);
             }
         }
-
-        // Redirect based on role
-        if ($user->isAdmin()) {
-            return redirect()->route('admin.dashboard');
-        }
-
-        return redirect()->route('home');
     }
 }

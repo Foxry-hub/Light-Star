@@ -18,6 +18,76 @@
 
 <body class="antialiased">
 
+    {{-- ═══ GOOGLE OAUTH ALERT TOAST ═══ --}}
+    @if (session('google_alert'))
+        @php $alert = session('google_alert'); @endphp
+        <div id="google-toast"
+            class="fixed top-6 right-6 z-[100] max-w-md transform transition-all duration-500 translate-x-0 opacity-100"
+            style="animation: slideInRight 0.5s ease-out;">
+            <div
+                class="rounded-2xl border p-5 shadow-2xl backdrop-blur-xl flex items-start gap-4
+                                        {{ $alert['type'] === 'warning' ? 'bg-yellow-500/10 border-yellow-500/30' : '' }}
+                                        {{ $alert['type'] === 'info' ? 'bg-blue-500/10 border-blue-500/30' : '' }}
+                                        {{ $alert['type'] === 'success' ? 'bg-emerald-500/10 border-emerald-500/30' : '' }}">
+                {{-- Icon --}}
+                <div class="shrink-0 mt-0.5">
+                    @if ($alert['type'] === 'warning')
+                        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                        </svg>
+                    @elseif ($alert['type'] === 'info')
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    @else
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    @endif
+                </div>
+                {{-- Text --}}
+                <div class="flex-1">
+                    <h4 class="text-sm font-semibold mb-1
+                                                {{ $alert['type'] === 'warning' ? 'text-yellow-300' : '' }}
+                                                {{ $alert['type'] === 'info' ? 'text-blue-300' : '' }}
+                                                {{ $alert['type'] === 'success' ? 'text-emerald-300' : '' }}">
+                        {{ $alert['type'] === 'warning' ? 'Akun Sudah Terdaftar' : '' }}
+                        {{ $alert['type'] === 'info' ? 'Akun Dihubungkan' : '' }}
+                        {{ $alert['type'] === 'success' ? 'Akun Berhasil Dibuat' : '' }}
+                    </h4>
+                    <p class="text-sm text-slate-text leading-relaxed">{{ $alert['message'] }}</p>
+                </div>
+                {{-- Close button --}}
+                <button onclick="document.getElementById('google-toast').style.display='none'"
+                    class="shrink-0 text-slate-text hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <style>
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(120%);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+        <script>         setTimeout(() => {             const toast = document.getElementById('google-toast');             if (toast) {                 toast.style.transform = 'translateX(120%)';                 toast.style.opacity = '0';                 setTimeout(() => toast.remove(), 500);             }         }, 6000);
+        </script>
+    @endif
+
     {{-- ═══ FLOATING WHATSAPP ═══ --}}
     <a href="https://wa.me/6281388088171" target="_blank" class="whatsapp-float" aria-label="Chat WhatsApp">
         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
@@ -27,7 +97,7 @@
     </a>
 
     {{-- ═══ HEADER ═══ --}}
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <a href="#beranda" class="flex items-center gap-3">
@@ -99,60 +169,92 @@
     </header>
 
     {{-- ═══ HERO SECTION ═══ --}}
-    <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="beranda" class="relative min-h-screen flex items-end overflow-visible">
+        {{-- Background --}}
         <div class="absolute inset-0">
             <img src="{{ asset('assets/images/hero-bg.png') }}" alt="Cityscape" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/70 to-navy"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/60 to-navy/90"></div>
         </div>
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-cyan/5 rounded-full blur-3xl"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32">
-            <div
-                class="inline-flex items-center gap-2 bg-cyan/10 border border-cyan/20 rounded-full px-4 py-2 mb-8 fade-up">
-                <span class="w-2 h-2 rounded-full bg-cyan pulse-dot"></span>
-                <span class="text-cyan text-sm font-medium">Siap Melayani 24/7</span>
-            </div>
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-tight mb-6 fade-up">
-                Kru Broadcast<br><span class="gradient-text">Profesional Anda.</span>
+        {{-- Ambient glow --}}
+        <div class="absolute top-1/4 left-0 w-[500px] h-[500px] bg-cyan/5 rounded-full blur-[120px]"></div>
+
+        {{-- Hero Content: left-aligned, positioned at the bottom --}}
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-48 pt-40">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] mb-8 fade-up">
+                Kru Broadcast<br>Profesional Anda.
             </h1>
-            <p class="text-lg sm:text-xl text-slate-text max-w-2xl mx-auto mb-10 leading-relaxed fade-up">
-                Jasa Operator Live Streaming & Dokumentasi Profesional.<br class="hidden sm:block">
+            <p class="text-lg sm:text-xl text-slate-text max-w-2xl leading-relaxed mb-4 fade-up">
+                Jasa Operator Live Streaming & Dokumentasi Profesional.
+            </p>
+            {{-- Cyan gradient line --}}
+            <div class="w-64 h-0.5 bg-gradient-to-r from-cyan to-transparent mb-6 fade-up"></div>
+            <p class="text-base text-slate-text/70 max-w-xl leading-relaxed fade-up">
                 Fokus pada acara Anda, biarkan tim ahli kami menangani seluruh teknis penyiaran.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up">
-                <a href="https://wa.me/6281388088171" target="_blank" class="btn-cyan text-base px-8 py-4"><span>Mulai
-                        Konsultasi Gratis</span></a>
-                <a href="#portofolio"
-                    class="border border-navy-border text-white font-semibold px-8 py-4 rounded-xl hover:border-cyan hover:text-cyan transition-all">Lihat
-                    Portofolio</a>
+        </div>
+
+        {{-- 3 Feature Cards overlapping bottom --}}
+        <div class="absolute bottom-0 left-0 right-0 z-20 translate-y-1/3">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-5">
+                    @php
+                        $heroFeatures = [
+                            [
+                                'icon' => '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>',
+                                'title' => 'Professional Team',
+                                'desc' => 'Tim ahli yang berpengalaman dalam mengelola detail teknis dan koordinasi lapangan secara presisi.',
+                            ],
+                            [
+                                'icon' => '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>',
+                                'title' => 'Creative Concept',
+                                'desc' => 'Kami menghadirkan ide-ide segar dan unik yang dipersonalisasi khusus untuk setiap klien kami.',
+                            ],
+                            [
+                                'icon' => '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>',
+                                'title' => 'Client Satisfaction',
+                                'desc' => 'Fokus utama kami adalah memberikan pengalaman yang berkesan bagi setiap tamu dan penyelenggara.',
+                            ],
+                        ];
+                    @endphp
+                    @foreach ($heroFeatures as $feat)
+                        <div
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-cyan/20 transition-all duration-500 group fade-up">
+                            <div class="text-cyan mb-4 group-hover:scale-110 transition-transform duration-500">
+                                {!! $feat['icon'] !!}
+                            </div>
+                            <h3 class="text-white font-bold text-base mb-2">{{ $feat['title'] }}</h3>
+                            <p class="text-slate-text text-sm leading-relaxed">{{ $feat['desc'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 fade-up">
+        </div>
+    </section>
+
+    {{-- Spacer for the overlapping cards --}}
+    <div class="h-44 md:h-52"></div>
+
+    {{-- ═══ STATS COUNTER ═══ --}}
+    <section class="py-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-up">
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="150">0</span>+
-                    </div>
+                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="150">0</span>+</div>
                     <div class="text-sm text-slate-text mt-1">Acara Ditangani</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="50">0</span>+
-                    </div>
+                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="50">0</span>+</div>
                     <div class="text-sm text-slate-text mt-1">Klien Puas</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="5">0</span>+
-                    </div>
+                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="5">0</span>+</div>
                     <div class="text-sm text-slate-text mt-1">Tahun Pengalaman</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="20">0</span>+
-                    </div>
+                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="20">0</span>+</div>
                     <div class="text-sm text-slate-text mt-1">Kru Profesional</div>
                 </div>
             </div>
-        </div>
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 float-animation">
-            <svg class="w-6 h-6 text-cyan" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
         </div>
     </section>
 
@@ -313,23 +415,28 @@
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">Portofolio <span
                             class="text-cyan">Acara</span></h2>
                 </div>
+                <a href="{{ route('portfolio.index') }}" class="text-slate-text hover:text-cyan text-sm font-medium transition-colors mt-4 sm:mt-0">See More...</a>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
                 @forelse($portfolios as $item)
                     <div class="portfolio-card fade-up">
-                        <img src="{{ str_starts_with($item->thumbnail, 'assets/') ? asset($item->thumbnail) : asset('storage/' . $item->thumbnail) }}"
-                            alt="{{ $item->title }}" class="w-full h-64 object-cover">
-                        <div class="portfolio-overlay">
-                            <h3 class="text-white font-semibold text-sm mb-2">{{ $item->title }}</h3>
+                        <div class="portfolio-img-wrapper relative overflow-hidden">
+                            <img src="{{ str_starts_with($item->thumbnail, 'assets/') ? asset($item->thumbnail) : asset('storage/' . $item->thumbnail) }}"
+                                alt="{{ $item->title }}" class="w-full h-52 object-cover">
                             @if ($item->video_url)
-                                <a href="{{ $item->video_url }}" target="_blank"
-                                    class="inline-flex items-center gap-2 text-cyan text-sm font-medium hover:text-cyan-light transition-colors">
-                                    Tonton Cuplikan
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path
-                                            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-                                    </svg>
+                                <a href="{{ $item->video_url }}" target="_blank" class="portfolio-overlay">
+                                    <div class="w-12 h-12 rounded-full bg-cyan/90 backdrop-blur-sm flex items-center justify-center shadow-lg shadow-cyan/30 transition-transform duration-300 hover:scale-110">
+                                        <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                                        </svg>
+                                    </div>
                                 </a>
+                            @endif
+                        </div>
+                        <div class="px-3 py-3">
+                            <h3 class="text-cyan font-semibold text-sm mb-1">{{ $item->title }}</h3>
+                            @if ($item->description)
+                                <p class="text-slate-text text-xs leading-relaxed line-clamp-2">{{ $item->description }}</p>
                             @endif
                         </div>
                     </div>
@@ -482,7 +589,7 @@
                         @enderror
                     </div>
                     <div>
-                        <button type="submit" class="btn-cyan text-sm px-8 py-3">
+                        <button type="submit" class="btn-cyan text-sm px-8 py-3 inline-flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path
                                     d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
@@ -505,12 +612,12 @@
             </div>
             <div class="mb-8 fade-up">
                 <div class="relative">
-                    <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-text" fill="none"
+                    <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-text pointer-events-none z-10" fill="none"
                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                     <input id="faq-search" type="text" placeholder="Cari pertanyaan..."
-                        class="newsletter-input w-full pl-12">
+                        class="w-full bg-navy-card border border-navy-border rounded-xl py-3 pl-12 pr-4 text-white text-sm focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/10 transition-all">
                 </div>
             </div>
             <div class="space-y-4 fade-up">
@@ -628,12 +735,6 @@
                                     d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                             </svg>
                         </a>
-                    </div>
-                    <h3 class="text-white font-semibold mb-4">Newsletter</h3>
-                    <form class="flex gap-2">
-                        <input type="email" placeholder="Email Anda" class="newsletter-input flex-1 text-sm">
-                        <button type="submit" class="btn-cyan text-sm px-4"><span>Kirim</span></button>
-                    </form>
                 </div>
             </div>
             <div class="border-t border-navy-border mt-12 pt-8 text-center">

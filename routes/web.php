@@ -12,13 +12,19 @@ use Illuminate\Support\Facades\Route;
 
 // Landing Page (public)
 Route::get('/', function () {
-    $portfolios = Portfolio::latest()->get();
+    $portfolios = Portfolio::latest()->take(8)->get();
     $testimonials = Testimonial::approved()->get();
     return view('welcome', compact('portfolios', 'testimonials'));
 })->name('home');
 
 // Public testimonial submission
 Route::post('/testimonial', [TestimonialSubmissionController::class, 'store'])->name('testimonial.store');
+
+// Full Portfolio page (public)
+Route::get('/portfolio', function () {
+    $portfolios = Portfolio::latest()->paginate(12);
+    return view('portfolio', compact('portfolios'));
+})->name('portfolio.index');
 
 // Google OAuth routes
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');

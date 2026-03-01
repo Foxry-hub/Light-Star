@@ -22,12 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     animatedElements.forEach(el => observer.observe(el));
 
-    /* ── Sticky Header with background change ──────── */
+    /* ── Sticky Header with smooth background change ── */
     const header = document.getElementById('main-header');
     if (header) {
+        let lastScrollY = 0;
+        let ticking = false;
+        const updateHeader = () => {
+            header.classList.toggle('nav-scrolled', lastScrollY > 50);
+            ticking = false;
+        };
         window.addEventListener('scroll', () => {
-            header.classList.toggle('nav-scrolled', window.scrollY > 50);
-        });
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        }, { passive: true });
     }
 
     /* ── Mobile Menu Toggle ─────────────────────────── */
