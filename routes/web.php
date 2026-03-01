@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TestimonialSubmissionController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Models\Portfolio;
@@ -18,6 +19,10 @@ Route::get('/', function () {
 
 // Public testimonial submission
 Route::post('/testimonial', [TestimonialSubmissionController::class, 'store'])->name('testimonial.store');
+
+// Google OAuth routes
+Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 
 // Admin Dashboard routes
 Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group(function () {
