@@ -38,8 +38,26 @@
 
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                autocomplete="current-password" />
+            <div class="relative">
+                <x-text-input id="password" class="block mt-1 w-full pr-11" type="password" name="password" required
+                    autocomplete="current-password" />
+                <button type="button" data-password-toggle="password"
+                    class="absolute inset-y-0 right-0 mt-1 flex items-center px-3 text-slate-text hover:text-cyan transition-colors"
+                    aria-label="Tampilkan password">
+                    <svg class="eye-open w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <svg class="eye-off w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path d="M3 3l18 18" />
+                        <path d="M10.585 10.587A2 2 0 0012 14a2 2 0 001.414-.586" />
+                        <path d="M9.88 5.09A10.94 10.94 0 0112 5c4.478 0 8.268 2.943 9.542 7a11.053 11.053 0 01-4.043 5.109" />
+                        <path d="M6.1 6.1A11.05 11.05 0 002.458 12C3.732 16.057 7.523 19 12 19a10.94 10.94 0 005.91-1.727" />
+                    </svg>
+                </button>
+            </div>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 

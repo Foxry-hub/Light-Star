@@ -73,6 +73,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* ── Password Visibility Toggle (Auth) ─────────── */
+    document.querySelectorAll('[data-password-toggle]').forEach(toggleBtn => {
+        toggleBtn.addEventListener('click', () => {
+            const inputId = toggleBtn.getAttribute('data-password-toggle');
+            const input = document.getElementById(inputId);
+            if (!input) return;
+
+            const willShow = input.type === 'password';
+            input.type = willShow ? 'text' : 'password';
+
+            const eyeOpen = toggleBtn.querySelector('.eye-open');
+            const eyeOff = toggleBtn.querySelector('.eye-off');
+            if (eyeOpen && eyeOff) {
+                eyeOpen.classList.toggle('hidden', !willShow);
+                eyeOff.classList.toggle('hidden', willShow);
+            }
+
+            toggleBtn.setAttribute('aria-label', willShow ? 'Sembunyikan password' : 'Tampilkan password');
+        });
+    });
+
     /* ── Testimonial Carousel ───────────────────────── */
     const track = document.getElementById('testimonial-track');
     const prevBtn = document.getElementById('carousel-prev');
