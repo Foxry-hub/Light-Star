@@ -81,19 +81,19 @@
         </aside>
 
         {{-- Main Content --}}
-        <div class="flex-1 lg:ml-64">
+        <div class="flex-1 min-w-0 lg:ml-64">
             {{-- Top Bar --}}
             <header
-                class="sticky top-0 z-30 bg-navy/80 backdrop-blur-xl border-b border-navy-border h-16 flex items-center px-4 lg:px-8">
-                <button id="sidebar-toggle" class="lg:hidden p-2 text-slate-text hover:text-white">
+                class="sticky top-0 z-30 bg-navy/80 backdrop-blur-xl border-b border-navy-border min-h-16 flex items-center px-3 sm:px-4 lg:px-8">
+                <button id="sidebar-toggle" class="lg:hidden p-2 rounded-lg text-slate-text hover:text-white hover:bg-navy-border/50 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
                 <div class="flex-1"></div>
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0 pl-2">
                     <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-sm font-bold">
+                        class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-sm font-bold shrink-0">
                         {{ substr(auth()->user()->name, 0, 1) }}
                     </div>
                     <span class="text-sm text-white font-medium hidden sm:block">{{ auth()->user()->name }}</span>
@@ -109,7 +109,7 @@
             @endif
 
             {{-- Page Content --}}
-            <main class="p-4 lg:p-8">
+            <main class="p-4 sm:p-5 lg:p-8 pb-24 sm:pb-8">
                 @yield('content')
             </main>
         </div>

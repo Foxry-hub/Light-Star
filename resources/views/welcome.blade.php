@@ -124,38 +124,39 @@
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn-cyan text-sm"><span>Sign In</span></a>
+                        <a href="{{ route('login') }}" class="btn-cyan text-sm px-4 py-2"><span>Sign In</span></a>
                     @endauth
                 </nav>
-                <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2">
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2 hover:bg-white/10 rounded-lg transition-colors">
                     <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
                     <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
                     <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
                 </button>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden pb-6">
+            <div id="mobile-menu" class="hidden md:hidden pb-6 pt-2">
                 <div
-                    class="flex flex-col gap-4 bg-navy-card/80 backdrop-blur-xl rounded-2xl p-6 border border-navy-border">
+                    class="flex flex-col gap-3 bg-navy-card/95 backdrop-blur-xl rounded-2xl p-5 border border-navy-border shadow-2xl">
                     <a href="#beranda"
-                        class="text-sm font-medium text-slate-heading hover:text-cyan transition-colors">Beranda</a>
+                        class="text-sm font-medium text-slate-heading hover:text-cyan transition-colors px-4 py-2 rounded-lg hover:bg-white/5">Beranda</a>
                     <a href="#layanan"
-                        class="text-sm font-medium text-slate-text hover:text-cyan transition-colors">Layanan</a>
+                        class="text-sm font-medium text-slate-text hover:text-cyan transition-colors px-4 py-2 rounded-lg hover:bg-white/5">Layanan</a>
                     <a href="#portofolio"
-                        class="text-sm font-medium text-slate-text hover:text-cyan transition-colors">Portofolio</a>
-                    <a href="#faq" class="text-sm font-medium text-slate-text hover:text-cyan transition-colors">FAQ</a>
+                        class="text-sm font-medium text-slate-text hover:text-cyan transition-colors px-4 py-2 rounded-lg hover:bg-white/5">Portofolio</a>
+                    <a href="#faq" class="text-sm font-medium text-slate-text hover:text-cyan transition-colors px-4 py-2 rounded-lg hover:bg-white/5">FAQ</a>
+                    <div class="border-t border-navy-border my-2"></div>
                     @auth
                         @if (auth()->user()->isAdmin())
                             <a href="{{ route('admin.dashboard') }}"
-                                class="btn-cyan text-sm text-center"><span>Dashboard</span></a>
+                                class="btn-cyan text-sm text-center px-4 py-2"><span>Dashboard</span></a>
                         @else
-                            <form method="POST" action="{{ route('logout') }}">@csrf
+                            <form method="POST" action="{{ route('logout') }}" class="w-full">@csrf
                                 <button type="submit"
-                                    class="text-sm font-medium text-slate-text hover:text-cyan transition-colors">Logout</button>
+                                    class="w-full text-sm font-medium text-center text-slate-text hover:text-cyan hover:bg-white/5 transition-colors px-4 py-2 rounded-lg">Logout</button>
                             </form>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" class="btn-cyan text-sm text-center"><span>Sign
-                                In</span></a>
+                        <a href="{{ route('login') }}"
+                            class="btn-cyan text-sm text-center px-4 py-2"><span>Sign In</span></a>
                     @endauth
                 </div>
             </div>
@@ -163,34 +164,34 @@
     </header>
 
     {{-- ═══ HERO SECTION ═══ --}}
-    <section id="beranda" class="relative min-h-screen flex items-end overflow-visible">
+    <section id="beranda" class="hero-section relative min-h-screen flex items-end overflow-visible">
         {{-- Background --}}
         <div class="absolute inset-0">
             <img src="{{ asset('assets/images/background.jpg') }}" alt="Cityscape" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/60 to-navy/90"></div>
         </div>
         {{-- Ambient glow --}}
-        <div class="absolute top-1/4 left-0 w-[500px] h-[500px] bg-cyan/5 rounded-full blur-[120px]"></div>
+        <div class="hero-glow absolute top-1/4 -left-24 sm:left-0 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] bg-cyan/5 rounded-full blur-[120px]"></div>
 
         {{-- Hero Content: left-aligned, positioned at the bottom --}}
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-48 pt-40">
-            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] mb-8 fade-up">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32 sm:pb-40 md:pb-48 pt-32 sm:pt-40">
+            <h1 class="text-2xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight sm:leading-[1.05] mb-4 sm:mb-6 md:mb-8 fade-up">
                 Kru Broadcast<br>Profesional Anda
             </h1>
-            <p class="text-lg sm:text-xl text-slate-text max-w-2xl leading-relaxed mb-4 fade-up">
+            <p class="text-sm sm:text-lg md:text-xl text-slate-text max-w-2xl leading-relaxed mb-3 sm:mb-4 fade-up">
                 Jasa Operator Live Streaming & Dokumentasi Profesional.
             </p>
             {{-- Cyan gradient line --}}
-            <div class="w-64 h-0.5 bg-gradient-to-r from-cyan to-transparent mb-6 fade-up"></div>
-            <p class="text-base text-slate-text/70 max-w-xl leading-relaxed fade-up">
+            <div class="w-48 sm:w-64 h-0.5 bg-gradient-to-r from-cyan to-transparent mb-4 sm:mb-6 fade-up"></div>
+            <p class="text-sm sm:text-base text-slate-text/70 max-w-xl leading-relaxed fade-up">
                 Fokus pada acara Anda, biarkan tim ahli kami menangani seluruh teknis penyiaran.
             </p>
         </div>
 
         {{-- 3 Feature Cards overlapping bottom --}}
-        <div class="absolute bottom-0 left-0 right-0 z-20 translate-y-1/3">
+        <div class="hero-feature-wrapper z-20 mt-4 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:translate-y-1/3">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-5">
+            <div class="hero-feature-grid grid md:grid-cols-3 gap-5">
                     @php
                         $heroFeatures = [
                             [
@@ -226,7 +227,7 @@
     </section>
 
     {{-- Spacer for the overlapping cards --}}
-    <div class="h-44 md:h-52"></div>
+    <div class="hero-spacer hidden lg:block h-44 md:h-52"></div>
 
     {{-- ═══ STATS COUNTER ═══ --}}
     <section class="py-12">
@@ -517,73 +518,73 @@
             @endif
 
             {{-- Section Title --}}
-            <div class="mb-12 fade-up">
-                <div class="section-divider mb-6"></div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-white">Bagikan <span class="text-cyan">Pengalaman
+            <div class="mb-8 sm:mb-12 fade-up">
+                <div class="section-divider mb-4 sm:mb-6"></div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Bagikan <span class="text-cyan">Pengalaman
                         Anda</span></h2>
-                <p class="text-slate-text mt-3">Ceritakan kesan Anda bekerja sama dengan Light Star. Testimoni Anda
+                <p class="text-slate-text text-sm sm:text-base mt-2 sm:mt-3">Ceritakan kesan Anda bekerja sama dengan Light Star. Testimoni Anda
                     sangat berarti bagi kami!</p>
             </div>
 
             {{-- Split Layout: Illustration + Form --}}
-            <div class="grid lg:grid-cols-2 gap-10 items-stretch fade-up">
-                {{-- Left: Illustration --}}
-                <div class="relative rounded-2xl overflow-hidden border border-navy-border bg-navy-card min-h-[350px]">
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-stretch fade-up">
+                {{-- Left: Illustration (hidden on mobile) --}}
+                <div class="hidden md:block relative rounded-2xl overflow-hidden border border-navy-border bg-navy-card min-h-[350px]">
                     <img src="{{ asset('assets/images/testimonial-illustration.png') }}" alt="Share your story"
                         class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <div class="flex items-center gap-3">
+                    <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+                        <div class="flex items-center gap-2 sm:gap-3">
                             <div class="flex -space-x-2">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-xs font-bold border-2 border-navy-card">
+                                    class="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-xs font-bold border-2 border-navy-card">
                                     😊</div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-bold border-2 border-navy-card">
+                                    class="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-bold border-2 border-navy-card">
                                     🎉</div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white text-xs font-bold border-2 border-navy-card">
+                                    class="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white text-xs font-bold border-2 border-navy-card">
                                     ⭐</div>
                             </div>
-                            <span class="text-white text-sm font-medium">Bergabung dengan klien puas lainnya!</span>
+                            <span class="text-white text-xs sm:text-sm font-medium">Bergabung dengan klien puas lainnya!</span>
                         </div>
                     </div>
                 </div>
 
                 {{-- Right: Form --}}
-                <form action="{{ route('testimonial.store') }}" method="POST" class="flex flex-col gap-5">
+                <form action="{{ route('testimonial.store') }}" method="POST" class="flex flex-col gap-3 sm:gap-5">
                     @csrf
                     <div>
-                        <label for="testi-name" class="block text-sm font-medium text-slate-heading mb-2">Nama
+                        <label for="testi-name" class="block text-xs sm:text-sm font-medium text-slate-heading mb-1.5 sm:mb-2">Nama
                             Lengkap</label>
                         <input type="text" id="testi-name" name="name"
                             value="{{ old('name', auth()->user()->name ?? '') }}" required
-                            placeholder="Masukkan nama Anda" class="newsletter-input w-full text-sm">
+                            placeholder="Masukkan nama Anda" class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
                         @error('name')
                             <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <label for="testi-role" class="block text-sm font-medium text-slate-heading mb-2">Jabatan /
+                        <label for="testi-role" class="block text-xs sm:text-sm font-medium text-slate-heading mb-1.5 sm:mb-2">Jabatan /
                             Peran</label>
                         <input type="text" id="testi-role" name="role_label" value="{{ old('role_label') }}" required
-                            placeholder="cth: Event Organizer, Wedding Planner" class="newsletter-input w-full text-sm">
+                            placeholder="cth: Event Organizer" class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
                         @error('role_label')
                             <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="flex-1">
-                        <label for="testi-content" class="block text-sm font-medium text-slate-heading mb-2">Kesan &
+                        <label for="testi-content" class="block text-xs sm:text-sm font-medium text-slate-heading mb-1.5 sm:mb-2">Kesan &
                             Pesan</label>
-                        <textarea id="testi-content" name="content" rows="5" required
+                        <textarea id="testi-content" name="content" rows="4" required
                             placeholder="Ceritakan pengalaman Anda bekerja sama dengan Light Star..."
-                            class="newsletter-input w-full text-sm resize-none">{{ old('content') }}</textarea>
+                            class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3 resize-none">{{ old('content') }}</textarea>
                         @error('content')
                             <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <button type="submit" class="btn-cyan text-sm px-8 py-3 inline-flex items-center gap-2">
+                        <button type="submit" class="btn-cyan text-xs sm:text-sm px-4 sm:px-8 py-2 sm:py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path
                                     d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
@@ -597,24 +598,24 @@
     </section>
 
     {{-- ═══ FAQ ═══ --}}
-    <section id="faq" class="py-24 lg:py-32 bg-navy-light/50">
+    <section id="faq" class="py-16 sm:py-24 lg:py-32 bg-navy-light/50">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 fade-up">
-                <div class="section-divider mx-auto mb-6"></div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Pertanyaan yang Sering <span
+            <div class="text-center mb-8 sm:mb-12 fade-up">
+                <div class="section-divider mx-auto mb-4 sm:mb-6"></div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4">Pertanyaan yang Sering <span
                         class="text-cyan">Diajukan</span></h2>
             </div>
-            <div class="mb-8 fade-up">
+            <div class="mb-6 sm:mb-8 fade-up">
                 <div class="relative">
-                    <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-text pointer-events-none z-10" fill="none"
+                    <svg class="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-slate-text pointer-events-none z-10" fill="none"
                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                     <input id="faq-search" type="text" placeholder="Cari pertanyaan..."
-                        class="w-full bg-navy-card border border-navy-border rounded-xl py-3 pl-12 pr-4 text-white text-sm focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/10 transition-all">
+                        class="w-full bg-navy-card border border-navy-border rounded-xl py-2 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-white text-xs sm:text-sm focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/10 transition-all">
                 </div>
             </div>
-            <div class="space-y-4 fade-up">
+            <div class="space-y-3 sm:space-y-4 fade-up">
                 @php
                     $faqs = [
                         [
@@ -667,14 +668,14 @@
                 @foreach ($faqs as $faq)
                     <div class="faq-item">
                         <div class="faq-header">
-                            <span class="text-white font-medium text-sm pr-4">{{ $faq['q'] }}</span>
-                            <svg class="faq-icon w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                            <span class="text-white font-medium text-xs sm:text-sm pr-3 sm:pr-4 flex-1">{{ $faq['q'] }}</span>
+                            <svg class="faq-icon w-4 sm:w-5 h-4 sm:h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
                         </div>
                         <div class="faq-body">
-                            <div class="px-6 pb-5 text-slate-text text-sm leading-relaxed">{{ $faq['a'] }}</div>
+                            <div class="px-4 sm:px-6 pb-3 sm:pb-5 text-slate-text text-xs sm:text-sm leading-relaxed">{{ $faq['a'] }}</div>
                         </div>
                     </div>
                 @endforeach
@@ -684,26 +685,26 @@
 
     {{-- ═══ FOOTER ═══ --}}
     <footer class="border-t border-navy-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="grid md:grid-cols-2 gap-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
                 <div>
-                    <div class="flex items-center gap-3 mb-6">
+                    <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                         <div
-                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+                            class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center">
+                            <svg class="w-5 sm:w-6 h-5 sm:h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                             </svg>
                         </div>
-                        <span class="text-xl font-bold text-white">Light <span class="text-cyan">Star</span></span>
+                        <span class="text-lg sm:text-xl font-bold text-white">Light <span class="text-cyan">Star</span></span>
                     </div>
-                    <p class="text-slate-text text-sm leading-relaxed mb-6">Kru broadcast profesional yang siap
+                    <p class="text-slate-text text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">Kru broadcast profesional yang siap
                         membantu Anda menghadirkan acara berkualitas tinggi melalui layanan live streaming dan
                         dokumentasi.</p>
                     <a href="https://wa.me/6281210534627" target="_blank"
-                        class="inline-flex items-center gap-2 text-cyan hover:text-cyan-light transition-colors text-sm">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-2 text-cyan hover:text-cyan-light transition-colors text-xs sm:text-sm font-medium">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                         </svg>
@@ -711,48 +712,49 @@
                     </a>
                 </div>
                 <div>
-                    <h3 class="text-white font-semibold mb-6">Peta Situs</h3>
-                    <ul class="space-y-3">
+                    <h3 class="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Peta Situs</h3>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
                         <li><a href="#beranda"
-                                class="text-slate-text hover:text-cyan text-sm transition-colors">Beranda</a></li>
-                        <li><a href="#tentang" class="text-slate-text hover:text-cyan text-sm transition-colors">Tentang
+                                class="text-slate-text hover:text-cyan transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="text-slate-text hover:text-cyan transition-colors">Tentang
                                 Kami</a></li>
                         <li><a href="#layanan"
-                                class="text-slate-text hover:text-cyan text-sm transition-colors">Layanan</a></li>
+                                class="text-slate-text hover:text-cyan transition-colors">Layanan</a></li>
                         <li><a href="#portofolio"
-                                class="text-slate-text hover:text-cyan text-sm transition-colors">Portofolio</a></li>
-                        <li><a href="#faq" class="text-slate-text hover:text-cyan text-sm transition-colors">FAQ</a>
+                                class="text-slate-text hover:text-cyan transition-colors">Portofolio</a></li>
+                        <li><a href="#faq" class="text-slate-text hover:text-cyan transition-colors">FAQ</a>
                         </li>
                     </ul>
                 </div>
-                <div class="hidden">
-                    <h3 class="text-white font-semibold mb-6">Ikuti Kami</h3>
-                    <div class="flex gap-3 mb-8">
+                <div class="hidden lg:block lg:col-span-1">
+                    <h3 class="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Ikuti Kami</h3>
+                    <div class="flex gap-2 sm:gap-3">
                         <a href="#"
-                            class="w-10 h-10 rounded-xl bg-navy-card border border-navy-border hover:border-cyan hover:text-cyan text-slate-text transition-all flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            class="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-navy-card border border-navy-border hover:border-cyan hover:text-cyan text-slate-text transition-all flex items-center justify-center">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                             </svg>
                         </a>
                         <a href="#"
-                            class="w-10 h-10 rounded-xl bg-navy-card border border-navy-border hover:border-cyan hover:text-cyan text-slate-text transition-all flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            class="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-navy-card border border-navy-border hover:border-cyan hover:text-cyan text-slate-text transition-all flex items-center justify-center">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                             </svg>
                         </a>
                         <a href="#"
-                            class="w-10 h-10 rounded-xl bg-navy-card border border-navy-border hover:border-cyan hover:text-cyan text-slate-text transition-all flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            class="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-navy-card border border-navy-border hover:border-cyan hover:text-cyan text-slate-text transition-all flex items-center justify-center">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                             </svg>
                         </a>
+                    </div>
                 </div>
             </div>
-            <div class="border-t border-navy-border mt-12 pt-8 text-center">
-                <p class="text-slate-text text-sm">&copy; {{ date('Y') }} Light Star. All rights reserved.</p>
+            <div class="border-t border-navy-border mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
+                <p class="text-slate-text text-xs sm:text-sm">&copy; {{ date('Y') }} Light Star. All rights reserved.</p>
             </div>
         </div>
     </footer>

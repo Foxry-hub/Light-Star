@@ -61,6 +61,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* ── Mobile Menu Toggle (Portfolio Page) ────────── */
+    const portfolioMenuBtn = document.getElementById('mobile-menu-portfolio');
+    const portfolioMenuContent = document.getElementById('mobile-menu-portfolio-content');
+    if (portfolioMenuBtn && portfolioMenuContent) {
+        portfolioMenuBtn.addEventListener('click', () => {
+            portfolioMenuContent.classList.toggle('hidden');
+            const bars = portfolioMenuBtn.querySelectorAll('span');
+            const isOpen = !portfolioMenuContent.classList.contains('hidden');
+            bars[0].style.transform = isOpen ? 'rotate(45deg) translate(5px, 5px)' : '';
+            bars[1].style.opacity = isOpen ? '0' : '1';
+            bars[2].style.transform = isOpen ? 'rotate(-45deg) translate(7px, -6px)' : '';
+        });
+        portfolioMenuContent.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                portfolioMenuContent.classList.add('hidden');
+                const bars = portfolioMenuBtn.querySelectorAll('span');
+                bars[0].style.transform = ''; bars[1].style.opacity = '1'; bars[2].style.transform = '';
+            });
+        });
+    }
+
     /* ── Smooth Scroll for Nav Links ────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
