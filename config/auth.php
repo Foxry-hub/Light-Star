@@ -112,4 +112,17 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Application Admin Account
+    |--------------------------------------------------------------------------
+    |
+    | Admin role mapping for OAuth and initial seeding credentials are defined
+    | here so secrets do not need to be stored in source code.
+    |
+    */
+
+    'admin_email' => env('ADMIN_EMAIL', 'lightsarmediaformsrketing@gmail.com'),
+    'admin_initial_password' => env('ADMIN_INITIAL_PASSWORD'),
+
 ];

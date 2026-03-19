@@ -175,7 +175,7 @@
         {{-- Hero Content: left-aligned, positioned at the bottom --}}
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-48 pt-40">
             <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] mb-8 fade-up">
-                Kru Broadcast<br>Profesional Anda.
+                Kru Broadcast<br>Profesional Anda
             </h1>
             <p class="text-lg sm:text-xl text-slate-text max-w-2xl leading-relaxed mb-4 fade-up">
                 Jasa Operator Live Streaming & Dokumentasi Profesional.

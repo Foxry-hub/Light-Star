@@ -27,11 +27,15 @@ Route::get('/portfolio', function () {
 })->name('portfolio.index');
 
 // Google OAuth routes
-Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
-Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
+Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])
+    ->middleware('throttle:20,1')
+    ->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])
+    ->middleware('throttle:20,1')
+    ->name('google.callback');
 
 // Admin Dashboard routes
-Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->prefix('dashboard')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Testimonials Management

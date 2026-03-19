@@ -6,18 +6,32 @@ use App\Models\User;
 use App\Models\Testimonial;
 use App\Models\Portfolio;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
     public function run(): void
     {
+        $adminEmail = (string) config('auth.admin_email');
+        $adminPassword = (string) config('auth.admin_initial_password');
+
+        if ($adminPassword === '') {
+            $adminPassword = Str::random(32);
+        }
+
         // Create Admin
-        User::create([
+        $adminUser = User::updateOrCreate([
+            'email' => $adminEmail,
+        ], [
             'name' => 'Admin Light Star',
-            'email' => 'admin@lightstar.com',
-            'password' => bcrypt('password'),
+            'password' => Hash::make($adminPassword),
             'role' => 'admin',
         ]);
+
+        if (is_null($adminUser->email_verified_at)) {
+            $adminUser->forceFill(['email_verified_at' => now()])->save();
+        }
 
         // Create Sample Customer
         User::create([
