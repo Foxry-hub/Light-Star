@@ -172,7 +172,7 @@
     <section id="beranda" class="relative min-h-screen flex items-end overflow-visible">
         {{-- Background --}}
         <div class="absolute inset-0">
-            <img src="{{ asset('assets/images/hero-bg.png') }}" alt="Cityscape" class="w-full h-full object-cover">
+            <img src="{{ asset('assets/images/background.jpg') }}" alt="Cityscape" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/60 to-navy/90"></div>
         </div>
         {{-- Ambient glow --}}
@@ -267,7 +267,7 @@
                         <div
                             class="absolute -inset-4 bg-gradient-to-r from-cyan/20 to-transparent rounded-2xl blur-2xl">
                         </div>
-                        <img src="{{ asset('assets/images/team-photo.png') }}" alt="Tim Light Star"
+                        <img src="{{ asset('assets/images/about us.jpg') }}" alt="Tim Light Star"
                             class="relative rounded-2xl w-full object-cover shadow-2xl border border-navy-border">
                     </div>
                 </div>
@@ -313,19 +313,19 @@
                 @php
                     $services = [
                         [
-                            'img' => 'service-livestreaming.png',
+                            'img' => 'operator livestreaming.jpg',
                             'title' => 'Operator Live Streaming',
                             'desc' =>
                                 'Ahli setup multi-platform streaming di Zoom, YouTube, Instagram, dan platform lainnya. Kami memastikan siaran berjalan stabil dengan kualitas audio visual terbaik.',
                         ],
                         [
-                            'img' => 'service-production.png',
+                            'img' => 'kru produksi.jpg',
                             'title' => 'Kru Produksi',
                             'desc' =>
                                 'Penyediaan cameraman dan audio engineer profesional yang berpengalaman menangani berbagai jenis acara, dari seminar hingga konser besar.',
                         ],
                         [
-                            'img' => 'service-postproduction.png',
+                            'img' => 'pasca produksi.jpg',
                             'title' => 'Pasca-Produksi',
                             'desc' =>
                                 'Jasa editing video, color grading, dan motion graphic berkualitas tinggi. Kami mengubah rekaman mentah menjadi konten yang siap dipublikasikan.',
