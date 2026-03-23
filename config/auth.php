@@ -122,7 +122,7 @@ return [
     |
     */
 
-    'admin_email' => env('ADMIN_EMAIL', 'lightsarmediaformsrketing@gmail.com'),
+    'admin_email' => env('ADMIN_EMAIL'),
     'admin_initial_password' => env('ADMIN_INITIAL_PASSWORD'),
 
 ];

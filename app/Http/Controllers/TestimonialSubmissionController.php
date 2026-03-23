@@ -10,6 +10,14 @@ class TestimonialSubmissionController extends Controller
 {
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->back()->with('testimonial_alert', [
+                'type' => 'warning',
+                'title' => 'Perlu Sign In',
+                'message' => 'Silakan sign in terlebih dahulu untuk mengirim testimoni.',
+            ]);
+        }
+
         $request->validate([
             'name' => 'required|string|max:100',
             'role_label' => 'required|string|max:100',
@@ -17,7 +25,7 @@ class TestimonialSubmissionController extends Controller
         ]);
 
         Testimonial::create([
-            'user_id' => Auth::check() ? Auth::id() : null,
+            'user_id' => Auth::id(),
             'name' => $request->name,
             'role_label' => $request->role_label,
             'content' => $request->content,

@@ -123,4 +123,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Runtime Feature Toggles
+    |--------------------------------------------------------------------------
+    |
+    | Operational flags controlled via environment variables. Use these to
+    | switch maintenance page and demo seed data on/off per environment.
+    |
+    */
+
+    'site_maintenance_mode' => filter_var(env('SITE_MAINTENANCE_MODE', false), FILTER_VALIDATE_BOOL),
+    'enable_demo_data' => filter_var(env('ENABLE_DEMO_DATA', true), FILTER_VALIDATE_BOOL),
+
 ];

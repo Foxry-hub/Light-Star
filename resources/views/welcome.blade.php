@@ -8,7 +8,7 @@
         content="Light Star — Kru Broadcast Profesional Anda. Jasa Operator Live Streaming & Dokumentasi Profesional.">
     <meta name="keywords" content="live streaming, broadcast, videografi, produksi video, dokumentasi acara">
     <meta name="author" content="Light Star">
-    <title>Light Star — Kru Broadcast Profesional Anda</title>
+    <title>Light Star media — Kru Broadcast Profesional Anda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
@@ -17,6 +17,20 @@
 </head>
 
 <body class="antialiased">
+
+    <style>
+        @keyframes slideInRight {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
 
     {{-- ═══ GOOGLE OAUTH ALERT TOAST ═══ --}}
     @if (session('google_alert'))
@@ -71,20 +85,47 @@
                 </button>
             </div>
         </div>
-        <style>
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(120%);
-                    opacity: 0;
-                }
-
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        </style>
         <script>         setTimeout(() => {             const toast = document.getElementById('google-toast');             if (toast) {                 toast.style.transform = 'translateX(120%)';                 toast.style.opacity = '0';                 setTimeout(() => toast.remove(), 500);             }         }, 6000);
+        </script>
+    @endif
+
+    {{-- ═══ TESTIMONIAL GUEST ALERT TOAST ═══ --}}
+    @if (session('testimonial_alert'))
+        @php $tAlert = session('testimonial_alert'); @endphp
+        <div id="testimonial-toast"
+            class="fixed top-6 right-6 z-[100] max-w-md transform transition-all duration-500 translate-x-0 opacity-100"
+            style="animation: slideInRight 0.5s ease-out;">
+            <div
+                class="rounded-2xl border p-5 shadow-2xl backdrop-blur-xl flex items-start gap-4
+                                        {{ ($tAlert['type'] ?? 'warning') === 'warning' ? 'bg-yellow-500/10 border-yellow-500/30' : 'bg-blue-500/10 border-blue-500/30' }}">
+                <div class="shrink-0 mt-0.5">
+                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                    </svg>
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-semibold mb-1 text-yellow-300">{{ $tAlert['title'] ?? 'Perlu Sign In' }}</h4>
+                    <p class="text-sm text-slate-text leading-relaxed">{{ $tAlert['message'] ?? 'Silakan sign in terlebih dahulu untuk mengirim testimoni.' }}</p>
+                </div>
+                <button onclick="document.getElementById('testimonial-toast').style.display='none'"
+                    class="shrink-0 text-slate-text hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <script>
+            setTimeout(() => {
+                const toast = document.getElementById('testimonial-toast');
+                if (toast) {
+                    toast.style.transform = 'translateX(120%)';
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 500);
+                }
+            }, 6000);
         </script>
     @endif
 
@@ -176,7 +217,7 @@
         {{-- Hero Content: left-aligned, positioned at the bottom --}}
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32 sm:pb-40 md:pb-48 pt-32 sm:pt-40">
             <h1 class="text-2xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight sm:leading-[1.05] mb-4 sm:mb-6 md:mb-8 fade-up">
-                Kru Broadcast<br>Profesional Anda
+                Kru Livestreaming <br>Profesional Anda
             </h1>
             <p class="text-sm sm:text-lg md:text-xl text-slate-text max-w-2xl leading-relaxed mb-3 sm:mb-4 fade-up">
                 Jasa Operator Live Streaming & Dokumentasi Profesional.
@@ -184,25 +225,20 @@
             {{-- Cyan gradient line --}}
             <div class="w-48 sm:w-64 h-0.5 bg-gradient-to-r from-cyan to-transparent mb-4 sm:mb-6 fade-up"></div>
             <p class="text-sm sm:text-base text-slate-text/70 max-w-xl leading-relaxed fade-up">
-                Fokus pada acara Anda, biarkan tim ahli kami menangani seluruh teknis penyiaran.
+                Fokus pada acara Anda, biarkan tim ahli kami menangani seluruh teknis Livestreaming.
             </p>
         </div>
 
         {{-- 3 Feature Cards overlapping bottom --}}
         <div class="hero-feature-wrapper z-20 mt-4 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:translate-y-1/3">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="hero-feature-grid grid md:grid-cols-3 gap-5">
+            <div class="hero-feature-grid grid md:grid-cols-2 gap-5">
                     @php
                         $heroFeatures = [
                             [
                                 'icon' => '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>',
                                 'title' => 'Professional Team',
                                 'desc' => 'Tim ahli yang berpengalaman dalam mengelola detail teknis dan koordinasi lapangan secara presisi.',
-                            ],
-                            [
-                                'icon' => '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>',
-                                'title' => 'Creative Concept',
-                                'desc' => 'Kami menghadirkan ide-ide segar dan unik yang dipersonalisasi khusus untuk setiap klien kami.',
                             ],
                             [
                                 'icon' => '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>',
@@ -229,30 +265,6 @@
     {{-- Spacer for the overlapping cards --}}
     <div class="hero-spacer hidden lg:block h-44 md:h-52"></div>
 
-    {{-- ═══ STATS COUNTER ═══ --}}
-    <section class="py-12">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-up">
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="150">0</span>+</div>
-                    <div class="text-sm text-slate-text mt-1">Acara Ditangani</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="50">0</span>+</div>
-                    <div class="text-sm text-slate-text mt-1">Klien Puas</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="5">0</span>+</div>
-                    <div class="text-sm text-slate-text mt-1">Tahun Pengalaman</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white"><span class="counter" data-target="20">0</span>+</div>
-                    <div class="text-sm text-slate-text mt-1">Kru Profesional</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     {{-- ═══ ABOUT US ═══ --}}
     <section id="tentang" class="py-24 lg:py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -268,16 +280,14 @@
                 </div>
                 <div class="fade-right">
                     <div class="section-divider mb-6"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">About <span class="text-cyan">Us</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Tentang <span class="text-cyan">Kami</span>
                     </h2>
-                    <p class="text-slate-text leading-relaxed mb-6"><strong class="text-white">Light Star</strong>
-                        adalah partner teknis terpercaya Anda dalam dunia penyiaran digital. Kami hadir bukan hanya
-                        sebagai penyedia jasa, tetapi sebagai mitra yang memahami kebutuhan teknis acara Anda secara
-                        mendalam.</p>
-                    <p class="text-slate-text leading-relaxed mb-8">Dengan pengalaman bertahun-tahun, tim kami mampu
-                        mengelola peralatan klien dan mengubahnya menjadi hasil karya profesional yang memukau. Dari
-                        setup sederhana hingga produksi multi-kamera yang kompleks, kami siap menghadirkan kualitas
-                        broadcast terbaik.</p>
+                    <p class="text-slate-text leading-relaxed mb-6"><strong class="text-white">Light Star Media</strong>
+                        berkomitmen menjadi partner produksi terpercaya dengan standar kerja
+                        profesional, rapi, dan berkualitas tinggi untuk mendukung citra terbaik event perusahaan Anda.
+                    </p>
+                    <p class="text-slate-text leading-relaxed mb-8">Kami siap berdiskusi lebih lanjut 
+                        untuk menyesuaikan kebutuhan teknis sesuai konsep acara</p>
                     <div class="flex flex-wrap gap-4">
                         @foreach (['Multi-Platform', 'Tim Berpengalaman', 'Peralatan Profesional'] as $tag)
                             <div class="flex items-center gap-2 bg-cyan/10 rounded-lg px-4 py-2">
@@ -301,29 +311,23 @@
                 <div class="section-divider mx-auto mb-6"></div>
                 <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Layanan <span class="text-cyan">Kami</span>
                 </h2>
-                <p class="text-slate-text max-w-xl mx-auto">Solusi lengkap untuk kebutuhan broadcast dan produksi
+                <p class="text-slate-text max-w-xl mx-auto">Solusi lengkap untuk kebutuhan Livestreaming dan produksi
                     video profesional Anda.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8 stagger-children">
+            <div class="grid md:grid-cols-2 gap-8 stagger-children">
                 @php
                     $services = [
                         [
-                            'img' => 'operator livestreaming.jpg',
-                            'title' => 'Operator Live Streaming',
+                            'img' => 'hybrid live streaming.jpg',
+                            'title' => 'Hybrid Live Streaming',
                             'desc' =>
-                                'Ahli setup multi-platform streaming di Zoom, YouTube, Instagram, dan platform lainnya. Kami memastikan siaran berjalan stabil dengan kualitas audio visual terbaik.',
+                                'Penyelenggaraan acara yang menggabungkan kehadiran fisik (offline) di lokasi dan penonton virtual (online) secara bersamaan melalui siaran langsung internet. Konsep ini memungkinkan interaksi dua arah antara pembicara di panggung dan audiens daring, memperluas jangkauan peserta, serta memberikan fleksibilitas tinggi.',
                         ],
                         [
-                            'img' => 'kru produksi.jpg',
-                            'title' => 'Kru Produksi',
+                            'img' => 'dokumentasi.jpg',
+                            'title' => 'Dokumentasi Foto dan Video Professional',
                             'desc' =>
-                                'Penyediaan cameraman dan audio engineer profesional yang berpengalaman menangani berbagai jenis acara, dari seminar hingga konser besar.',
-                        ],
-                        [
-                            'img' => 'pasca produksi.jpg',
-                            'title' => 'Pasca-Produksi',
-                            'desc' =>
-                                'Jasa editing video, color grading, dan motion graphic berkualitas tinggi. Kami mengubah rekaman mentah menjadi konten yang siap dipublikasikan.',
+                                'Layanan ini meliputi peliputan, pengeditan, dan penyampaian hasil akhir berupa highlight video dan foto resolusi tinggi, sering kali dengan paket durasi fleksibel.',
                         ],
                     ];
                 @endphp
@@ -354,11 +358,10 @@
                     <div class="section-divider mb-6"></div>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Mengapa Memilih <span
                             class="text-cyan">Kami?</span></h2>
-                    <p class="text-slate-text text-lg leading-relaxed max-w-3xl">Kami menghadirkan tenaga ahli
-                        spesialis yang mahir mengoperasikan berbagai platform siaran digital. Tim kami dibekali
-                        kemampuan teknis untuk menangani kendala perangkat secara instan, memastikan acara Anda
-                        berjalan lancar. Dengan pendekatan yang profesional dan responsif, setiap detail teknis akan
-                        kami kelola sehingga Anda bisa fokus sepenuhnya pada konten dan audiens.</p>
+                    <p class="text-slate-text text-lg leading-relaxed max-w-3xl">Tim kami dibekali kemampuan teknis
+                        untuk menangani kendala perangkat secara tepat, memastikan acara Anda berjalan lancar. Dengan
+                        pendekatan yang profesional dan responsif, setiap detail teknis akan kami kelola sehingga Anda
+                        bisa fokus sepenuhnya pada acara dan audiens.</p>
                     <div class="grid sm:grid-cols-3 gap-8 mt-12">
                         @php
                             $features = [
@@ -465,10 +468,16 @@
                                                 d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
                                         </svg>
                                         <p class="text-slate-text text-lg leading-relaxed mb-8">"{{ $t->content }}"</p>
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan to-cyan-dark mx-auto mb-3 flex items-center justify-center text-white font-bold text-lg">
-                                            {{ substr($t->name, 0, 1) }}
-                                        </div>
+                                        @if ($t->user && $t->user->avatar_url)
+                                            <img src="{{ $t->user->avatar_url }}" alt="Foto profil {{ $t->name }}"
+                                                class="w-12 h-12 rounded-full object-cover mx-auto mb-3 border border-cyan/30"
+                                                loading="lazy" referrerpolicy="no-referrer">
+                                        @else
+                                            <div
+                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan to-cyan-dark mx-auto mb-3 flex items-center justify-center text-white font-bold text-lg">
+                                                {{ substr($t->name, 0, 1) }}
+                                            </div>
+                                        @endif
                                         <h4 class="text-white font-semibold">{{ $t->name }}</h4>
                                         <p class="text-cyan text-sm">{{ $t->role_label }}</p>
                                     </div>
@@ -504,7 +513,7 @@
     </section>
 
     {{-- ═══ TESTIMONIAL SUBMISSION FORM ═══ --}}
-    <section class="py-24 lg:py-32 bg-navy-light/50">
+    <section id="bagikan-pengalaman" class="py-24 lg:py-32 bg-navy-light/50">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Success Message --}}
             @if (session('testimonial_success'))
@@ -565,10 +574,10 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="testi-role" class="block text-xs sm:text-sm font-medium text-slate-heading mb-1.5 sm:mb-2">Jabatan /
-                            Peran</label>
+                        <label for="testi-role" class="block text-xs sm:text-sm font-medium text-slate-heading mb-1.5 sm:mb-2">Perusahaan /
+                            Instansi</label>
                         <input type="text" id="testi-role" name="role_label" value="{{ old('role_label') }}" required
-                            placeholder="cth: Event Organizer" class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
+                            placeholder="Masukkan nama perusahaan atau instansi" class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
                         @error('role_label')
                             <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -584,13 +593,26 @@
                         @enderror
                     </div>
                     <div>
-                        <button type="submit" class="btn-cyan text-xs sm:text-sm px-4 sm:px-8 py-2 sm:py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path
-                                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                            </svg>
-                            <span>Kirim Testimoni</span>
-                        </button>
+                        @auth
+                            <button type="submit" class="btn-cyan text-xs sm:text-sm px-4 sm:px-8 py-2 sm:py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path
+                                        d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                                <span>Kirim Testimoni</span>
+                            </button>
+                        @else
+                            <button id="guest-testimonial-btn" type="button" class="btn-cyan text-xs sm:text-sm px-4 sm:px-8 py-2 sm:py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path
+                                        d="M6 12L3.269 3.126A59.768 59.77 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                                <span>Kirim Testimoni</span>
+                            </button>
+                        @endauth
+                        @guest
+                            <p class="text-xs text-slate-text mt-2">Untuk mengirim testimoni, Anda perlu sign in terlebih dahulu.</p>
+                        @endguest
                     </div>
                 </form>
             </div>
@@ -621,7 +643,7 @@
                         [
                             'q' => 'Bagaimana cara memesan jasa Light Star?',
                             'a' =>
-                                'Anda bisa menghubungi kami melalui WhatsApp di +62 812-1053-4627 atau klik tombol "Konsultasi Gratis" di website ini. Tim kami akan merespons dalam waktu maksimal 1 jam.',
+                                'Anda bisa menghubungi kami melalui WhatsApp di +62 812-1053-4627. Tim kami akan merespons dalam waktu maksimal 1 jam.',
                         ],
                         [
                             'q' => 'Berapa biaya jasa live streaming?',
@@ -689,17 +711,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
                 <div>
                     <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                        <div
-                            class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center">
-                            <svg class="w-5 sm:w-6 h-5 sm:h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                            </svg>
-                        </div>
-                        <span class="text-lg sm:text-xl font-bold text-white">Light <span class="text-cyan">Star</span></span>
+                        <img src="{{ asset('assets/images/light-star-media-logo.png') }}" alt="Light Star Media Logo"
+                            class="w-10 sm:w-11 h-10 sm:h-11 object-contain" loading="lazy">
+                        <span class="text-lg sm:text-xl font-bold text-white">light star media</span>
                     </div>
-                    <p class="text-slate-text text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">Kru broadcast profesional yang siap
+                    <p class="text-slate-text text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">Kru Livestreaming profesional yang siap
                         membantu Anda menghadirkan acara berkualitas tinggi melalui layanan live streaming dan
                         dokumentasi.</p>
                     <a href="https://wa.me/6281210534627" target="_blank"
@@ -732,6 +748,79 @@
             </div>
         </div>
     </footer>
+
+    @guest
+        <script>
+            (() => {
+                const guestBtn = document.getElementById('guest-testimonial-btn');
+                if (!guestBtn) return;
+
+                guestBtn.addEventListener('click', () => {
+                    const existing = document.getElementById('testimonial-toast');
+                    if (existing) existing.remove();
+
+                    const toast = document.createElement('div');
+                    toast.id = 'testimonial-toast';
+                    toast.className = 'fixed top-6 right-6 z-[100] max-w-md transform transition-all duration-500 translate-x-0 opacity-100';
+                    toast.style.animation = 'slideInRight 0.5s ease-out';
+                    toast.innerHTML = `
+                        <div class="rounded-2xl border p-5 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-yellow-500/10 border-yellow-500/30">
+                            <div class="shrink-0 mt-0.5">
+                                <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-semibold mb-1 text-yellow-300">Perlu Sign In</h4>
+                                <p class="text-sm text-slate-text leading-relaxed">Silakan sign in terlebih dahulu untuk mengirim testimoni.</p>
+                            </div>
+                            <button id="guest-toast-close" class="shrink-0 text-slate-text hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+
+                    document.body.appendChild(toast);
+
+                    const closeBtn = document.getElementById('guest-toast-close');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', () => {
+                            toast.style.transform = 'translateX(120%)';
+                            toast.style.opacity = '0';
+                            setTimeout(() => toast.remove(), 500);
+                        });
+                    }
+
+                    setTimeout(() => {
+                        toast.style.transform = 'translateX(120%)';
+                        toast.style.opacity = '0';
+                        setTimeout(() => toast.remove(), 500);
+                    }, 1300);
+
+                    setTimeout(() => {
+                        window.location.href = '{{ route('testimonial.signin') }}';
+                    }, 700);
+                });
+            })();
+        </script>
+    @endguest
+
+    <script>
+        (() => {
+            if (window.location.hash !== '#bagikan-pengalaman') return;
+
+            const nameInput = document.getElementById('testi-name');
+            const roleInput = document.getElementById('testi-role');
+            if (!nameInput) return;
+
+            setTimeout(() => {
+                const targetInput = nameInput.value.trim() !== '' && roleInput ? roleInput : nameInput;
+                targetInput.focus({ preventScroll: true });
+            }, 300);
+        })();
+    </script>
 
 </body>
 

@@ -9,20 +9,64 @@ use App\Http\Controllers\Admin\PortfolioController;
 use App\Models\Portfolio;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+$demoPortfolioTitles = [
+    'Webinar Nasional Pendidikan',
+    'Live Wedding Bali',
+    'Corporate Annual Meeting',
+    'Live Concert Jakarta',
+];
+
+$demoTestimonialContents = [
+    'Light Star benar-benar menyelamatkan acara kami! Setup streaming yang cepat dan kualitas video yang luar biasa. Tim mereka sangat profesional dan responsif.',
+    'Klien kami sangat puas dengan hasil live streaming pernikahan. Keluarga yang tidak bisa hadir merasa seolah ada di lokasi. Terima kasih Light Star!',
+    'Sudah 3 kali menggunakan jasa Light Star untuk event perusahaan kami. Selalu konsisten dengan kualitas terbaik. Highly recommended!',
+    'Pertama kali menggunakan jasa live streaming dan hasilnya diluar ekspektasi. Tim Light Star sangat kooperatif.',
+];
 
 // Landing Page (public)
-Route::get('/', function () {
-    $portfolios = Portfolio::latest()->take(8)->get();
-    $testimonials = Testimonial::approved()->get();
+Route::get('/', function () use ($demoPortfolioTitles, $demoTestimonialContents) {
+    $showDemoData = (bool) config('app.enable_demo_data');
+
+    $portfolios = Portfolio::query()
+        ->when(!$showDemoData, function ($query) use ($demoPortfolioTitles) {
+            $query->whereNotIn('title', $demoPortfolioTitles);
+        })
+        ->latest()
+        ->take(8)
+        ->get();
+
+    $testimonials = Testimonial::approved()
+        ->when(!$showDemoData, function ($query) use ($demoTestimonialContents) {
+            $query->whereNotIn('content', $demoTestimonialContents);
+        })
+        ->with('user')
+        ->get();
+
     return view('welcome', compact('portfolios', 'testimonials'));
 })->name('home');
 
 // Public testimonial submission
 Route::post('/testimonial', [TestimonialSubmissionController::class, 'store'])->name('testimonial.store');
 
+// Helper redirect so guests can login and return to testimonial section
+Route::get('/testimonial/signin', function (Request $request) {
+    $request->session()->put('url.intended', route('home') . '#bagikan-pengalaman');
+    return redirect()->route('login');
+})->middleware('guest')->name('testimonial.signin');
+
 // Full Portfolio page (public)
-Route::get('/portfolio', function () {
-    $portfolios = Portfolio::latest()->paginate(12);
+Route::get('/portfolio', function () use ($demoPortfolioTitles) {
+    $showDemoData = (bool) config('app.enable_demo_data');
+
+    $portfolios = Portfolio::query()
+        ->when(!$showDemoData, function ($query) use ($demoPortfolioTitles) {
+            $query->whereNotIn('title', $demoPortfolioTitles);
+        })
+        ->latest()
+        ->paginate(12);
+
     return view('portfolio', compact('portfolios'));
 })->name('portfolio.index');
 
