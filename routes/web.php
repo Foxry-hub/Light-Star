@@ -6,6 +6,7 @@ use App\Http\Controllers\TestimonialSubmissionController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Models\Portfolio;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
@@ -45,7 +46,7 @@ Route::get('/', function () use ($demoPortfolioTitles, $demoTestimonialContents)
         ->get();
 
     return view('welcome', compact('portfolios', 'testimonials'));
-})->name('home');
+})->middleware('track.visitor')->name('home');
 
 // Public testimonial submission
 Route::post('/testimonial', [TestimonialSubmissionController::class, 'store'])->name('testimonial.store');
@@ -68,7 +69,7 @@ Route::get('/portfolio', function () use ($demoPortfolioTitles) {
         ->paginate(12);
 
     return view('portfolio', compact('portfolios'));
-})->name('portfolio.index');
+})->middleware('track.visitor')->name('portfolio.index');
 
 // Google OAuth routes
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])
@@ -95,6 +96,13 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('dashboard')->name('adm
     Route::get('/portfolios/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolios.edit');
     Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
     Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
+
+    // Analytics & Visitor Tracking
+    Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+    Route::get('/analytics/active-visitors', [AnalyticsController::class, 'activeVisitors'])->name('analytics.active-visitors');
+    Route::get('/analytics/visitor/{sessionId}', [AnalyticsController::class, 'visitorDetail'])->name('analytics.visitor-detail');
+    Route::get('/api/analytics/stats', [AnalyticsController::class, 'apiStats'])->name('analytics.api-stats');
+    Route::get('/analytics/export', [AnalyticsController::class, 'export'])->name('analytics.export');
 });
 
 // Profile routes (authenticated users)
