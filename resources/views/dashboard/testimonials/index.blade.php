@@ -13,10 +13,16 @@
             <div class="bg-navy-card border border-navy-border rounded-2xl p-4">
                 <div class="flex items-start justify-between gap-3 mb-3">
                     <div class="flex items-center gap-3 min-w-0">
-                        <div
-                            class="w-9 h-9 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-xs font-bold shrink-0">
-                            {{ substr($t->name, 0, 1) }}
-                        </div>
+                        @if ($t->user && $t->user->avatar_url)
+                            <img src="{{ $t->user->avatar_url }}" alt="Foto profil {{ $t->name }}"
+                                class="w-9 h-9 rounded-full object-cover shrink-0 border border-cyan/30"
+                                loading="lazy" referrerpolicy="no-referrer">
+                        @else
+                            <div
+                                class="w-9 h-9 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-xs font-bold shrink-0">
+                                {{ substr($t->name, 0, 1) }}
+                            </div>
+                        @endif
                         <div class="min-w-0">
                             <p class="text-white font-medium text-sm truncate">{{ $t->name }}</p>
                             <p class="text-slate-text text-xs truncate">{{ $t->role_label }}</p>
@@ -76,9 +82,16 @@
                         <tr class="border-b border-navy-border/50 hover:bg-navy-border/20 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-xs font-bold">
-                                        {{ substr($t->name, 0, 1) }}</div>
+                                    @if ($t->user && $t->user->avatar_url)
+                                        <img src="{{ $t->user->avatar_url }}" alt="Foto profil {{ $t->name }}"
+                                            class="w-8 h-8 rounded-full object-cover border border-cyan/30"
+                                            loading="lazy" referrerpolicy="no-referrer">
+                                    @else
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan to-cyan-dark flex items-center justify-center text-white text-xs font-bold">
+                                            {{ substr($t->name, 0, 1) }}
+                                        </div>
+                                    @endif
                                     <span class="text-white font-medium">{{ $t->name }}</span>
                                 </div>
                             </td>
