@@ -29,6 +29,23 @@ class GoogleController extends Controller
         return strcasecmp($email, $adminEmail) === 0;
     }
 
+    private function resolveGoogleDisplayName($googleUser, string $googleEmail): string
+    {
+        $name = trim((string) ($googleUser->getName() ?? ''));
+
+        if ($name !== '') {
+            return $name;
+        }
+
+        $nickname = trim((string) ($googleUser->getNickname() ?? ''));
+
+        if ($nickname !== '') {
+            return $nickname;
+        }
+
+        return trim((string) strstr($googleEmail, '@', true));
+    }
+
     /**
      * Redirect the user to Google's OAuth page.
      */
@@ -82,6 +99,8 @@ class GoogleController extends Controller
             return redirect()->route('login')->with('status', 'Akun Google tidak memiliki email yang valid.');
         }
 
+        $googleName = $this->resolveGoogleDisplayName($googleUser, $googleEmail);
+
         $shouldForceAdmin = $this->shouldForceAdminRole($googleEmail);
 
         // Check if a user with this google_id already exists
@@ -92,6 +111,10 @@ class GoogleController extends Controller
 
             if ($googleEmail && strcasecmp($user->email, $googleEmail) !== 0) {
                 $updates['email'] = $googleEmail;
+            }
+
+            if ($googleName !== '' && $user->name !== $googleName) {
+                $updates['name'] = $googleName;
             }
 
             if ($shouldForceAdmin && $user->role !== 'admin') {
@@ -139,6 +162,10 @@ class GoogleController extends Controller
                     'avatar_url' => $googleAvatar,
                 ];
 
+                if ($googleName !== '' && $existingUser->name !== $googleName) {
+                    $updates['name'] = $googleName;
+                }
+
                 if ($shouldForceAdmin && $existingUser->role !== 'admin') {
                     $updates['role'] = 'admin';
                 }
@@ -163,7 +190,7 @@ class GoogleController extends Controller
             } else {
                 // Create a brand new user via Google
                 $user = User::create([
-                    'name' => $googleUser->getName(),
+                    'name' => $googleName,
                     'email' => $googleEmail,
                     'google_id' => $googleUser->getId(),
                     'avatar_url' => $googleAvatar,

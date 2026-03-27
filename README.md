@@ -1,52 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="https://raw.githubusercontent.com/Foxy-hub/Light-Star/main/public/assets/images/light-star-media-logo.png" width="120" alt="Light Star Media Logo"></p>
+
+<h1 align="center">Light Star Media</h1>
+
+<p align="center"><strong>Kru Broadcast Profesional Anda</strong></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <em>Jasa Operator Live Streaming & Dokumentasi Profesional untuk Acara Anda</em>
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tentang Light Star Media
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Light Star Media adalah layanan broadcast profesional yang menyediakan solusi lengkap untuk kebutuhan live streaming dan dokumentasi acara Anda. Dengan tim operator berpengalaman dan peralatan berkualitas tinggi, kami siap membantu mewujudkan acara Anda menjadi lebih profesional dan berkesan.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Kami menawarkan layanan layanan meliputi:
 
-## Learning Laravel
+- **Live Streaming Profesional** - Siaran langsung berkualitas tinggi dengan teknologi terkini
+- **Dokumentasi Video** - Rekaman profesional untuk kenang-kenangan dan kebutuhan promosi
+- **Operator Berpengalaman** - Tim yang terlatih dan siap menangani berbagai jenis acara
+- **Layanan Paket Lengkap** - Dari persiapan hingga post-production dengan harga terjangkau
+- **Teknologi Modern** - Peralatan broadcast terbaru untuk hasil maksimal
+- **Customer Support** - Dukungan profesional sebelum, selama, dan sesudah acara
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Jenis Acara yang Kami Layani
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Konferensi & Seminar
+- Webinar & Workshop
+- Acara Perusahaan & Gathering
+- Acara Pendidikan & Upacara
+- Event Olahraga
+- Konser & Pertunjukan
+- Dan berbagai acara lainnya
 
-## Laravel Sponsors
+## Fitur Platform
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Platform kami menyediakan:
 
-### Premium Partners
+- 📊 **Dashboard Analytics** - Pantau statistik pertunjukan Anda secara real-time
+- 🎬 **Portofolio Management** - Kelola dokumentasi project dan showcase karya terbaik
+- ⭐ **Testimoni Klien** - Lihat review dan pengalaman klien kami sebelumnya
+- 🔐 **Admin Panel** - Kelola semua konten dan layanan dengan mudah
+- 📱 **Responsive Design** - Akses dari berbagai perangkat dengan sempurna
+- 🚀 **Performa Optimal** - Website cepat dan reliable untuk pengalaman terbaik
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Hubungi Kami
 
-## Contributing
+Kami siap membantu mewujudkan acara impian Anda!
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- 📱 **WhatsApp**: [Hubungi Kami](https://wa.me/6281210534627)
+- 🌐 **Website**: [light-star.vercel.app](https://light-star.vercel.app)
+- 📧 **Email**: Tersedia di website kami
 
-## Code of Conduct
+## Kebijakan Privasi
+
+Dengan menggunakan layanan kami, Anda menyetujui kebijakan privasi Light Star Media. Kami berkomitmen menjaga keamanan dan privasi data Anda.
+
+---
+
+<p align="center">
+  <strong>&copy; 2026 Light Star Media. All rights reserved.</strong>
+</p>
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 

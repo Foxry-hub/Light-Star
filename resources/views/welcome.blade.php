@@ -566,9 +566,15 @@
                     <div>
                         <label for="testi-name" class="block text-xs sm:text-sm font-medium text-slate-heading mb-1.5 sm:mb-2">Nama
                             Lengkap</label>
-                        <input type="text" id="testi-name" name="name"
-                            value="{{ old('name', auth()->user()->name ?? '') }}" required
-                            placeholder="Masukkan nama Anda" class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
+                        @auth
+                            <input type="text" id="testi-name" name="name"
+                                value="{{ old('name', auth()->user()->name ?? '') }}" autocomplete="name" required
+                                class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
+                        @else
+                            <input type="text" id="testi-name" name="name"
+                                value="{{ old('name') }}" autocomplete="name" required
+                                placeholder="Masukkan nama Anda" class="newsletter-input w-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3">
+                        @endauth
                         @error('name')
                             <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -705,6 +711,42 @@
         </div>
     </section>
 
+    {{-- ═══ PRIVACY POLICY MODAL ═══ --}}
+    <div id="privacy-modal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-navy-card border border-navy-border rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-navy-card border-b border-navy-border px-6 py-4 flex items-center justify-between">
+                <h2 class="text-lg sm:text-xl font-bold text-white">Kebijakan Privasi Light Star Media</h2>
+                <button id="privacy-modal-close" type="button" class="text-slate-text hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="px-6 py-6 text-slate-text text-sm sm:text-base leading-relaxed space-y-4">
+                <p>Di Light Star Media, kami menghargai privasi pengunjung kami. Kebijakan ini menjelaskan bagaimana kami mengelola informasi Anda:</p>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-2">Informasi Log</h3>
+                    <p>Kami secara otomatis mencatat data standar seperti alamat IP, jenis browser, dan waktu kunjungan untuk keperluan statistik dan keamanan website.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-2">Layanan Pihak Ketiga</h3>
+                    <p>Kami menggunakan Layanan Google (Login & Analytics) yang mungkin mengumpulkan informasi sesuai dengan kebijakan privasi Google.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-2">Keamanan</h3>
+                    <p>Kami berkomitmen menjaga keamanan data Anda dengan standar keamanan web terbaru.</p>
+                </div>
+                
+                <div class="pt-4 border-t border-navy-border">
+                    <p class="text-cyan">Dengan menggunakan website kami, Anda menyetujui kebijakan privasi ini.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- ═══ FOOTER ═══ --}}
     <footer class="border-t border-navy-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -740,6 +782,13 @@
                                 class="text-slate-text hover:text-cyan transition-colors">Portofolio</a></li>
                         <li><a href="#faq" class="text-slate-text hover:text-cyan transition-colors">FAQ</a>
                         </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Lainnya</h3>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                        <li><button id="privacy-policy-btn" type="button"
+                                class="text-slate-text hover:text-cyan transition-colors">Kebijakan Privasi</button></li>
                     </ul>
                 </div>
             </div>
@@ -819,6 +868,33 @@
                 const targetInput = nameInput.value.trim() !== '' && roleInput ? roleInput : nameInput;
                 targetInput.focus({ preventScroll: true });
             }, 300);
+        })();
+    </script>
+
+    <script>
+        (() => {
+            const privacyBtn = document.getElementById('privacy-policy-btn');
+            const privacyModal = document.getElementById('privacy-modal');
+            const privacyCloseBtn = document.getElementById('privacy-modal-close');
+
+            if (!privacyBtn || !privacyModal || !privacyCloseBtn) return;
+
+            const openModal = () => {
+                privacyModal.classList.remove('hidden');
+            };
+
+            const closeModal = () => {
+                privacyModal.classList.add('hidden');
+            };
+
+            privacyBtn.addEventListener('click', openModal);
+            privacyCloseBtn.addEventListener('click', closeModal);
+
+            privacyModal.addEventListener('click', (e) => {
+                if (e.target === privacyModal) {
+                    closeModal();
+                }
+            });
         })();
     </script>
 
