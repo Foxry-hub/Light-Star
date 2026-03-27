@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/Foxy-hub/Light-Star/main/public/assets/images/light-star-media-logo.png" width="120" alt="Light Star Media Logo"></p>
+<p align="center"><img src="public/assets/images/light-star-media-logo.png" width="120" alt="Light Star Media Logo"></p>
 
 <h1 align="center">Light Star Media</h1>
 
